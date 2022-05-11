@@ -9,10 +9,6 @@ import datetime
 import time
 import sys
 import ddddocr
-from PIL import Image
-import io
-from io import StringIO, BytesIO
-from apscheduler.schedulers.blocking import BlockingScheduler
 
 TRY_LIMIT = 5
 
