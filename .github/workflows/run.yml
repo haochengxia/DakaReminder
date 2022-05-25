@@ -29,5 +29,8 @@ jobs:
         env:
           ACCOUNT: ${{ secrets.ACCOUNT }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          ACCOUNT2: ${{ secrets.ACC }}
+          PASSWORD2: ${{ secrets.PAS }}
         run: |
           python3 ./daka.py ${ACCOUNT} ${PASSWORD}
+          python3 ./daka.py ${ACCOUNT2} ${PASSWORD2}
