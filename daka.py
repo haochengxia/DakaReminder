@@ -198,6 +198,7 @@ def main(username, password, cnt=0):
 
 if __name__ == "__main__":
     username = sys.argv[1]
+    print(username)
     password = sys.argv[2]
     try:
         main(username, password, 0)
