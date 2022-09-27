@@ -80,7 +80,7 @@ class DaKa(object):
     def get_info(self, html=None):
         """Get hitcard info, which is the old info with updated new time."""
         if not html:
-            res = self.sess.get(self.base_url, headers=self.headers， verify=False)
+            res = self.sess.get(self.base_url, headers=self.headers, verify=False)
             html = res.content.decode()
 
         try:
