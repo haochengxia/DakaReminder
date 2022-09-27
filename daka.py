@@ -38,11 +38,11 @@ class DaKa(object):
 
     def login(self):
         """Login to ZJU platform"""
-        res = self.sess.get(self.login_url, headers=self.headers)
+        res = self.sess.get(self.login_url, headers=self.headers, verify=False)
         execution = re.search(
             'name="execution" value="(.*?)"', res.text).group(1)
         res = self.sess.get(
-            url='https://zjuam.zju.edu.cn/cas/v2/getPubKey', headers=self.headers).json()
+            url='https://zjuam.zju.edu.cn/cas/v2/getPubKey', headers=self.headers, verify=False).json()
         n, e = res['modulus'], res['exponent']
         encrypt_password = self._rsa_encrypt(self.password, e, n)
 
@@ -59,13 +59,13 @@ class DaKa(object):
             raise LoginError('登录失败，请核实账号密码重新登录')
         return self.sess
 
-    def get_captcha(self):
-        """Get CAPTCHA code"""
-        resp = self.sess.get(self.captcha_url, headers=self.headers)
-        recg = ddddocr.DdddOcr()
-        captcha = recg.classification(resp.content)
-        print("Code Recg:", captcha)
-        return captcha
+#     def get_captcha(self):
+#         """Get CAPTCHA code"""
+#         resp = self.sess.get(self.captcha_url, headers=self.headers)
+#         recg = ddddocr.DdddOcr()
+#         captcha = recg.classification(resp.content)
+#         print("Code Recg:", captcha)
+#         return captcha
 
     def post(self):
         """Post the hitcard info"""
@@ -80,7 +80,7 @@ class DaKa(object):
     def get_info(self, html=None):
         """Get hitcard info, which is the old info with updated new time."""
         if not html:
-            res = self.sess.get(self.base_url, headers=self.headers)
+            res = self.sess.get(self.base_url, headers=self.headers， verify=False)
             html = res.content.decode()
 
         try:
@@ -118,7 +118,7 @@ class DaKa(object):
         new_info['jcqzrq'] = ""
         new_info['gwszdd'] = ""
         new_info['szgjcs'] = ""
-        new_info['verifyCode'] = self.get_captcha()
+        # new_info['verifyCode'] = self.get_captcha()
         self.info = new_info
         return new_info
 
