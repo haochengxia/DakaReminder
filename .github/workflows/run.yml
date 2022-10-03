@@ -23,7 +23,6 @@ jobs:
       - name: Install packages
         run: |
           pip3 install requests
-          pip3 install ddddocr
           pip3 install pillow
       - name: upload
         env:
